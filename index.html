@@ -38,15 +38,11 @@
                 <th>QR code</th>
             </tr>
         </thead>
-
         <tbody>
             
         </tbody>
     </table>
 
-
-       
-    <!-- <div id="qr"></div> -->
 </body>
 
 <script src="qrcode.js"></script>
@@ -61,11 +57,8 @@
    
        function PrintQR(){
     //Create QR code
-    // document.getElementById("qr").innerHTML=""; // claer object
     tbodyEl.innerHTML="";
     var Qtyinput = document.getElementById("Qty_input").value;
-    // for(var i = 0 ; i <Qtyinput ; i++){
-    //   grgenerate();
      AddRow();
      
      
@@ -73,21 +66,35 @@
 }
 
  function AddRow(){
+       var userinput = document.getElementById("input").value;
+
      var Qtyinput = document.getElementById("Qty_input").value;
       var W_input = document.getElementById("W_input").value;
         var H_input = document.getElementById("H_input").value;
         var colorDark_input = document.getElementById("colorDark_input").value;
         var colorLight_input = document.getElementById("colorLight_input").value;
-      
+     var randomNum = [];
+    //loop code
+    for (var a= 0 ;  a<Qtyinput ; a++){
+     var random = Math.round(Math.random() * 10000) ;
+        randomNum[a] = `${userinput}/${random}`;
+    }
 
-     // Loop create Tbody
+
+
+        // Loop create Tbody
      for(var i = 0 ; i <Qtyinput ; i++){
-       var userinput = document.getElementById("input").value;
        var qrcode = 
             tbodyEl.innerHTML += `
             <tr >
-                <td>${userinput}</td>
-                <td ><div  id=${i}></div></td>
+                <td>${randomNum[i]}</td>
+                <td >
+                <div  id=${i}></div>
+                <div  id=${i}>
+                <img src="privaLogo.png" alt="Logo" width="50" height="10">
+                </div>
+               
+                </td>
             </tr>
         `;
     }
@@ -104,9 +111,8 @@
            colorLight : colorLight_input,
            correctLevel : QRCode.CorrectLevel.H
         });
-         qrcode.makeCode(userinput);// make another code.
-        //   countId ++;
-}
+         qrcode.makeCode(`${randomNum[b]}`);// make another code.
+     }
 }
 
 </script>
@@ -158,8 +164,10 @@ td div{
 }
 
 td img{
-         margin: 5px;
-         padding: 2px;
+         margin-top: 5px;
+         padding-top: 2px;
+         padding-bottom: 0;
+         margin-bottom: 0;
       }
 </style>
 </html>
