@@ -10,20 +10,20 @@
     <form>
     <div>
         <h3>QR Code Data</h3>
-        <input type="text" id="input" placeholder="Enter Text">
+        <input type="text" id="input" placeholder="Enter Text">  
          <h3>QR Code Qty</h3>
         <input type="text" id="Qty_input" placeholder="Enter Qty">
     </div>
 
      <div>
          <h3>QR Code Size</h3>
-        <input type="text" id="W_input" placeholder="QR Width">
-           <input type="text" id="H_input" placeholder="QR Height">
+        <input type="text" id="W_input" placeholder="QR Width" value="50">
+           <input type="text" id="H_input" placeholder="QR Height" value="50">
     </div>
     <div>
         <h3>QR Code Color</h3>
-        <input type="text" id="colorDark_input" placeholder="Color Dark">
-        <input type="text" id="colorLight_input" placeholder="Color Light">
+        <input type="text" id="colorDark_input" placeholder="Color Dark" value="#000000">
+        <input type="text" id="colorLight_input" placeholder="Color Light" value="#FFFFFF">
     </div>
     <div>
         <input type="button" id="generate" value="Generate QR Code" onclick="PrintQR()"> 
@@ -74,6 +74,10 @@
 
  function AddRow(){
      var Qtyinput = document.getElementById("Qty_input").value;
+      var W_input = document.getElementById("W_input").value;
+        var H_input = document.getElementById("H_input").value;
+        var colorDark_input = document.getElementById("colorDark_input").value;
+        var colorLight_input = document.getElementById("colorLight_input").value;
       
 
      // Loop create Tbody
@@ -94,11 +98,11 @@
      for(var b = 0 ; b <Qtyinput ; b ++){
 
      var qrcode = new QRCode(document.getElementById(b),{
-	        width : 25 ,//W_input,
-	        height :25 ,// H_input,
-             // colorDark : colorDark_input,
-            // colorLight : colorLight_input,
-            // correctLevel : QRCode.CorrectLevel.H
+	        width : W_input,
+	        height : H_input,
+           colorDark : colorDark_input,
+           colorLight : colorLight_input,
+           correctLevel : QRCode.CorrectLevel.H
         });
          qrcode.makeCode(userinput);// make another code.
         //   countId ++;
@@ -153,9 +157,9 @@ td div{
     align-items: center;
 }
 
-#qr img{
-         margin: 0px;
-         padding: 0px;
+td img{
+         margin: 5px;
+         padding: 2px;
       }
 </style>
 </html>
