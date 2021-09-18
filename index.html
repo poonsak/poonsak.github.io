@@ -29,7 +29,18 @@
         <input type="button" id="generate" value="Generate QR Code" onclick="PrintQR()"> 
     </div>
     </form>
- <p id="qr_name">QRCODE</p>
+
+
+    <table border="1" id="show" >
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>QR code</th>
+            </tr>
+        </thead>
+    </table>
+
+
     <div id="qr">
        
      </div>
@@ -37,10 +48,39 @@
 <script src="qrcode.js"></script>
 <script>
 function PrintQR(){
+
+		var list1 = [];
+		var list2 = [];
+
+		var n = 1;
+		var x = 0;
+
+		function AddRow(){
+
+			var AddRown = document.getElementById('show');
+			var NewRow = AddRown.insertRow(n);
+
+			list1[x] = document.getElementById("input").value;
+			list2[x] = grgenerate();
+		
+
+			var cel1 = NewRow.insertCell(0);
+			var cel2 = NewRow.insertCell(1);
+	
+
+			cel1.innerHTML = list1[x];
+			cel2.innerHTML = list2[x];
+	
+
+			n++;
+			x++;
+		}
+    //Create QR code
     document.getElementById("qr").innerHTML=""; // claer object
     var Qtyinput = document.getElementById("Qty_input").value;
     for(var i = 0 ; i <Qtyinput ; i++){
-      grgenerate();
+    //   grgenerate();
+      AddRow();
     }
 }
 
@@ -50,10 +90,7 @@ function PrintQR(){
         var H_input = document.getElementById("H_input").value;
         var colorDark_input = document.getElementById("colorDark_input").value;
         var colorLight_input = document.getElementById("colorLight_input").value;
-        // document.getElementById("qr_name").innerHTML="MyQRCode";
-        // document.write(document.getElementById("qr_name").innerHTML="MyQRCode");
-      
-        // document.getElementById("qr").innerHTML=""; // claer object
+
         var qrcode = new QRCode(document.getElementById("qr"),{
 	        width : W_input,
 	        height : H_input,
@@ -62,9 +99,7 @@ function PrintQR(){
             correctLevel : QRCode.CorrectLevel.H
         });
          qrcode.makeCode(userinput);// make another code.
-        // document.getElementById("qr").innerHTML=""; // claer object
-        // new QRCode(document.getElementById("qr"),userinput);
-    }
+      }
 </script>
 
 <style>
