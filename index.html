@@ -45,63 +45,11 @@
     </style>
 
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.min.js"></script>
-    <script>
-   function generatePDF() {
-            // Choose the element that our invoice is rendered in.
-            const element = document.getElementById("invoice");
-            // Choose the element and save the PDF for our user.
-            var pdf;
-            var pdfout;
-            var Narvarande = "Johnny";
-            var filnamn = "123456";
-            var Lagenhetsadress = "BB1234 43";
-            html2pdf().from(element).output('datauri').then(function (pdfout) {
-
-//  console.log(btoa(pdf));;
-
-                $.ajax({
-                    method: "POST",
-                    url: "save.php",
-                    data: {
-                        data: pdfout,
-                        besiktare: Narvarande,
-                        namn: filnamn,
-                        adress: Lagenhetsadress,
-                    },
-                }).done(function (data) {
-                    console.log("Return från skickapdf: ");
-                    console.log(data);
-                });
-
-            }).saveAs();
-        }
-    </script> -->
-
-
-<!-- <style>
-        .center-me {
-            font-size: 15px;
-            margin: auto;
-            height: 10px;
-            max-width: 500px;
-            margin: 75px auto 40px auto;
-            display: flex;
-        }
-    </style> -->
+   
 </head>
-<!-- Set "A5", "A4" or "A3" for class name -->
-<!-- Set also "landscape" if you need -->
 <body class="A4 portrait">
 
-<!-- Each sheet element should have the class "sheet" -->
-<!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-<!-- <div class="invoice-box" id="invoice"> -->
-
-    
-
-    
+   
 <section class="sheet" id="content-print">
     <div class="box-body" id="box_data" style="display: flex;padding: 5px 10px 0 10px;margin-bottom: -21px;">
             <table width="100%" border="1px">
@@ -132,7 +80,7 @@
     </div>
 </section>
 
- <div>
+ <div style="margin: 20px;">
         <h3>Font Text</h3>
         <input type="text" id="txtInput" placeholder="ใส่คำหน้า Random">  
          <h3>Line Qty</h3>
@@ -170,7 +118,8 @@ var tdCol = [];
 
     //loop Random code
     for (var i= 0 ;  i < Qtyinput ; i++){
-        var random = Math.round(Math.random() * 10000) ;
+        // var random = Math.round(Math.random() * 10000) ;
+        var random = Math.floor(Math.random() * (9999 - 1000))+ 1000 ;
         randomNum[i] = `${random}`;
         printCode[i] = `${userinput}/${random}`;
     }
